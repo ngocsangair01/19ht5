@@ -13,6 +13,7 @@ Ví dụ: quan hệ 1 - n (1 lớp học có nhiều sinh viên)
  - Class sinh viên sẽ được định danh bởi các thông tin: id, name, age, id_lophoc
 ## Sử dụng jpa kết hợp với post mapping và get mapping
 ## kiểm tra lý thuyết về database, sql
+## Kết nối posgreSql thông qua pgadmin4
 ## Tạo 1 class mới
 ## Lấy thông tin tất cả các class
 ## Lấy thông tin 1 class theo id
