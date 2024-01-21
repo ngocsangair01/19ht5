@@ -12,13 +12,19 @@ import java.util.List;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
-    @Query("select s "+
+    @Query("select s " +
             "from Student s " +
-            "where (s.name is null or upper(s.name) like upper(concat('%',:name,'%')) )" +
-            "or (s.age is null or s.age = :age )" +
-            "or (s.address is null or upper(s.address) like upper(concat('%',:address,'%')) )" +
-            "or (s.classStudent is null or upper(s.classStudent) like upper(concat('%',:classStudent,'%')) )" +
-            "or (s.school is null or upper(s.school) like upper(concat('%',:school,'%')) )"
+            "where (upper(s.name) like upper(concat('%',:name,'%')) )" +
+            "and (:age is null or s.age = :age )" +
+            "and (upper(s.address) like upper(concat('%',:address,'%')) )" +
+            "and (upper(s.classStudent) like upper(concat('%',:classStudent,'%')) )" +
+            "and (s.school like concat('%',:school,'%') )"
     )
-    List<Student> getListStudent(@Param("name") String name,@Param("age") Integer age,@Param("address") String address,@Param("classStudent") String classStudent,@Param("school") String school, Pageable pageable);
+    List<Student> getListStudent(@Param("name") String name,
+                                 @Param("age") Integer age,
+                                 @Param("address") String address,
+                                 @Param("classStudent") String classStudent,
+                                 @Param("school") String school,
+                                 Pageable pageable
+    );
 }
