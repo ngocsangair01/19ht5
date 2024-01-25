@@ -27,6 +27,11 @@ public class StudentController {
         List<StudentDataOutput> result = studentService.getListStudent(input);
         return ResponseEntity.ok(result);
     }
+    @GetMapping("/key")
+    public ResponseEntity<?> getListStudentByKeyword(String keyword){
+        List<StudentDataOutput> result = studentService.getListStudentByKeyWord(keyword);
+        return ResponseEntity.ok(result);
+    }
     @PostMapping
     public ResponseEntity<?> createStudent(StudentDataInput input){
         StudentDataOutput result = studentService.createStudent(input);

@@ -14,11 +14,11 @@ import java.util.List;
 public interface StudentRepository extends JpaRepository<Student, Long> {
     @Query("select s " +
             "from Student s " +
-            "where (upper(s.name) like upper(concat('%',:name,'%')) )" +
+            "where (:name is null or upper(s.name) like upper(concat('%',:name,'%')) )" +
             "and (:age is null or s.age = :age )" +
-            "and (upper(s.address) like upper(concat('%',:address,'%')) )" +
-            "and (upper(s.classStudent) like upper(concat('%',:classStudent,'%')) )" +
-            "and (s.school like concat('%',:school,'%') )"
+            "and (:address is null or upper(s.address) like upper(concat('%',:address,'%')) )" +
+            "and (:classStudent is null or upper(s.classStudent) like upper(concat('%',:classStudent,'%')) )" +
+            "and (:school is null or s.school like concat('%',:school,'%') )"
     )
     List<Student> getListStudent(@Param("name") String name,
                                  @Param("age") Integer age,
@@ -27,4 +27,12 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
                                  @Param("school") String school,
                                  Pageable pageable
     );
+    @Query("select s " +
+            "from Student s " +
+            "where (:keyword is null or upper(s.name) like upper(concat('%',:keyword,'%')) )" +
+//            "and (:keyword is null or s.age = cast(:keyword as numeric(10,2) ) ) " +
+            "or (:keyword is null or upper(s.address) like upper(concat('%',:keyword,'%')) )" +
+            "or (:keyword is null or upper(s.classStudent) like upper(concat('%',:keyword,'%')) )" +
+            "or (:keyword is null or s.school like concat('%',:keyword,'%') )")
+    List<Student> getListByKeyWord(@Param("keyword") String keyword);
 }

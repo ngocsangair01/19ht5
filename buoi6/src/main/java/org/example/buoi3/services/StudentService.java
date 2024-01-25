@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface StudentService {
     List<StudentDataOutput> getListStudent(GetListStudentInput input);
+    List<StudentDataOutput> getListStudentByKeyWord(String keyword);
     StudentDataOutput createStudent(StudentDataInput input);
 }

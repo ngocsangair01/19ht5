@@ -34,6 +34,14 @@ public class StudentServiceImp implements StudentService {
     }
 
     @Override
+    public List<StudentDataOutput> getListStudentByKeyWord(String keyword) {
+        List<StudentDataOutput> listOutput;
+        List<Student> students = studentRepository.getListByKeyWord(keyword);
+        listOutput = students.stream().map(student -> new StudentDataOutput(student.getName(),student.getAge(),student.getAddress(),student.getSchool(),student.getClassStudent())).toList();
+        return listOutput;
+    }
+
+    @Override
     public StudentDataOutput createStudent(StudentDataInput input) {
         Student student = studentMapper.toStudent(input,null);
         studentRepository.save(student);
