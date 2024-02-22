@@ -26,4 +26,11 @@ public class PostController {
         PostDataOutput postDataOutput = postService.sharePost(input,idPost,idUserShare);
         return ResponseEntity.ok(postDataOutput);
     }
+
+    @GetMapping("{idPost}")
+    public ResponseEntity<?> getPost(@PathVariable("idPost") Long idPost) {
+        PostDataOutput postDataOutput = postService.getPost(idPost);
+        return ResponseEntity.ok(postDataOutput);
+    }
+
 }

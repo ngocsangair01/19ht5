@@ -1,17 +1,15 @@
 package org.example.buoi3.models;
 
 import jakarta.persistence.*;
+import org.example.buoi3.models.base.BaseEntity;
 import org.hibernate.annotations.Nationalized;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class User extends BaseEntity {
 
     @Column(name = "name")
     @Nationalized
@@ -26,19 +24,17 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String name, String avatar, List<Post> posts) {
-        this.id = id;
+    public User(String name, String avatar, List<Post> posts) {
         this.name = name;
         this.avatar = avatar;
         this.posts = posts;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public User(Long id, Long createBy, LocalDateTime createAt, Long updateBy, LocalDateTime updateAt, Boolean status, String name, String avatar, List<Post> posts) {
+        super(id, createBy, createAt, updateBy, updateAt, status);
+        this.name = name;
+        this.avatar = avatar;
+        this.posts = posts;
     }
 
     public String getName() {

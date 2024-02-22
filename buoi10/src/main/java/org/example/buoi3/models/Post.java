@@ -2,16 +2,15 @@ package org.example.buoi3.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.example.buoi3.models.base.BaseEntity;
 import org.hibernate.annotations.Nationalized;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "post")
-public class Post {
+public class Post extends BaseEntity {
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;///
 
     @Column(name = "content")
     @Nationalized
@@ -40,8 +39,7 @@ public class Post {
     public Post() {
     }
 
-    public Post(Long id, String content, String contentOriginal, Long idUserOriginal, Long idOriginal, Boolean isPost, User user) {
-        this.id = id;
+    public Post(String content, String contentOriginal, Long idUserOriginal, Long idOriginal, Boolean isPost, User user) {
         this.content = content;
         this.contentOriginal = contentOriginal;
         this.idUserOriginal = idUserOriginal;
@@ -50,12 +48,14 @@ public class Post {
         this.user = user;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public Post(Long id, Long createBy, LocalDateTime createAt, Long updateBy, LocalDateTime updateAt, Boolean status, String content, String contentOriginal, Long idUserOriginal, Long idOriginal, Boolean isPost, User user) {
+        super(id, createBy, createAt, updateBy, updateAt, status);
+        this.content = content;
+        this.contentOriginal = contentOriginal;
+        this.idUserOriginal = idUserOriginal;
+        this.idOriginal = idOriginal;
+        this.isPost = isPost;
+        this.user = user;
     }
 
     public String getContent() {
